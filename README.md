@@ -7,8 +7,8 @@ This script demonstrates a simple process of splitting a set of numeric IDs into
    - Sum these differences to get the total distance.
 
 2. **Total Similarities**  
-   - For each unique number in the sorted left list, count how many times it appears in the sorted right list.  
-   - Multiply that number by its frequency and add it to the running total of similarities.
+   - **Optimized Approach**: Instead of calling `.count()` repeatedly, this script uses a dictionary to track how many times each ID appears in the right list.  
+   - For each unique number in the sorted left list, we look up its frequency in the dictionary, multiply the number by its frequency, and add that to the running total of similarities.
 
 ---
 
@@ -23,12 +23,13 @@ This script demonstrates a simple process of splitting a set of numeric IDs into
 
 3. **Calculate Total Distance**  
    - Compare each pair of indices (`i`) in the sorted left and right lists.  
-   - Use `abs(int(sorted_left_list[i]) - int(sorted_right_list[i]))` to find the distance.  
+   - Use `abs(int(sorted_left_list[i]) - int(sorted_right_list[i]))` to find the distance. Use abs() to get the result as a positive number.
    - Accumulate the result into `total_distance`.
 
 4. **Calculate Total Similarities**  
-   - For each unique ID in the sorted left list, determine how many times it appears in the sorted right list.  
-   - Multiply the ID by the count of occurrences and add to `total_similarities`.
+   - Build a dictionary (hash map) of each ID’s frequency in the right list.  
+   - For each ID in the left list, multiply the ID by its frequency from the dictionary, then add to `total_similarities`.  
+   - This approach avoids scanning the right list for each element, significantly reducing complexity.
 
 ---
 
@@ -38,11 +39,11 @@ This script demonstrates a simple process of splitting a set of numeric IDs into
 2. Run the script with Python (3.x or higher recommended):
 
 ```bash
-
-python script_name.py
+python solution-v2.py
 ```
 
-## The script prints out:
+## Output
+
 1. The count of IDs in each list.
 2. The total distance between sorted left and right IDs.
-3. The total similarities based on repeated occurrences.
+3. The total similarities, based on repeated occurrences.
